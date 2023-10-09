@@ -4,7 +4,7 @@
 
 Install new conda environment
 ```
-conda create --name py3.11 python=3.11 -c conda-forge
+conda create --name py3.12 python=3.12 -c conda-forge
 ```
 
 Install reflex
@@ -23,6 +23,12 @@ reflex init
 
 Run application in development mode
 ```
+reflex run
+```
+
+If you restart in a new environment, clone the repo, and run
+```
+reflex init
 reflex run
 ```
 
