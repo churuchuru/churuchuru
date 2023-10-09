@@ -15,8 +15,8 @@ pip install reflex
 Make new project
 ```
 mkdir my_app_name
-$ cd my_app_name
-$ reflex init
+cd my_app_name
+reflex init
 ```
 
 ## Running
