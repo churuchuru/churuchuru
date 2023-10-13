@@ -3,7 +3,7 @@ from rxconfig import config
 
 import reflex as rx
 
-docs_url = "https://reflex.dev/docs/getting-started/introduction"
+docs_url = "https://www.churuchuru.com/"
 filename = f"{config.app_name}/{config.app_name}.py"
 
 
@@ -17,10 +17,10 @@ def index() -> rx.Component:
     return rx.fragment(
         rx.color_mode_button(rx.color_mode_icon(), float="right"),
         rx.vstack(
-            rx.heading("Welcome!", font_size="2em"),
-            rx.box("Get started by editing ", rx.code(filename, font_size="1em")),
+            rx.heading("Churu Churu", font_size="2em"),
+            # rx.box("Get started by editing ", rx.code(filename, font_size="1em")),
             rx.link(
-                "Check out our docs!",
+                "www.churuchuru.com",
                 href=docs_url,
                 border="0.1em solid",
                 padding="0.5em",
