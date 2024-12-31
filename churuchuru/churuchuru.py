@@ -10,22 +10,25 @@ def layout(*children):
         rx.vstack(
             # Navigation bar
             rx.hstack(
-                rx.heading("My App"),
                 rx.hstack(
                     rx.link("Home", href="/"),
-                    rx.link("Counter", href="/counter"),
+                    # rx.link("Counter", href="/counter"),
                     spacing="3",
                 ),
                 width="100%",
-                justify="between",
-                padding="4",
+                justify="center",
+                padding_top="2em",
             ),
-            # Main content
+            # Main content 
             rx.box(
                 *children,
-                padding_top="6em",
+                # padding_top="6em",
+                width="100%",
             ),
-        )
+            width="100%",
+            align="center",
+        ),
+        height="100vh",
     )
 
 # Main page
@@ -78,7 +81,7 @@ class State(rx.State):
 
 # Counter App
 def counter() -> rx.Component:
-    return rx.center(
+    return layout(rx.center(
         rx.vstack(
             rx.heading("Counter"),
             rx.hstack(
@@ -104,6 +107,7 @@ def counter() -> rx.Component:
             align="center",
         ),
         height="100vh",
+    )
     )
 
 
