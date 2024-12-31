@@ -23,9 +23,9 @@ class State(rx.State):
 
 # Frontend
 def index() -> rx.Component:
-    return rx.container(
-        rx.heading("Counter App", align='center', padding_bottom='1em'),
+    return rx.center(
         rx.vstack(
+            rx.heading("Counter App"),
             rx.hstack(
                 rx.button(
                     "Decrement", 
@@ -42,18 +42,14 @@ def index() -> rx.Component:
             ),
             rx.button(
                 "Reset",
-                color_scheme="gray",
+                color_scheme="gray", 
                 on_click=State.reset_count,
-                width="27.5%",  # Makes button span full width
             ),
+            spacing="4",
             align="center",
-            justify="center",
-            width="100%",  # Makes vstack take full width
         ),
-        min_height="100vh",
-        padding_top="20em",
+        height="100vh",
     )
-
 
 # Define application
 app = rx.App()
