@@ -1,5 +1,6 @@
 import reflex as rx
 from churuchuru.apps.counter import counter
+from churuchuru.apps.imagetopdf import imagetopdf
 from churuchuru.layout import layout
 
 '''
@@ -23,6 +24,18 @@ def index():
                 ),
                 as_child=True,
             ),
+            rx.card(
+                rx.link(
+                    rx.vstack(
+                        rx.heading("Image to PDF"),
+                        rx.text("Application to convert any image to a PDF"),
+                        spacing="2",
+                        align="center",
+                    ),
+                    href="/imagetopdf"
+                ),
+                as_child=True,
+            ),
             spacing="2",
             justify="center",
             align="center",
@@ -42,4 +55,6 @@ app = rx.App()
 # Add pages
 app.add_page(index)
 app.add_page(counter)
+app.add_page(imagetopdf)
+
 
