@@ -110,34 +110,43 @@ class State(rx.State):
 def imagetopdf() -> rx.Component:
     return layout(
         rx.vstack(
-            rx.heading("Image to PDF Converter"),
+            rx.heading("Image to PDF", size="4", color="blue.800"),
             
             rx.upload(
                 rx.vstack(
                     rx.button(
                         "Select Images",
                         color_scheme="blue",
+                        size="2",  # Numeric size
                     ),
                     rx.text(
-                        "Drag and drop image files here or click to select"
+                        "Drag and drop image files here or click to select",
+                        color="gray.600",
+                        font_size="sm",
                     ),
+                    align="center",
+                    spacing="2",
                 ),
                 id="upload_1",
-                border="1px dotted rgb(107,99,246)",
+                border="2px dashed",
+                border_color="blue.200",
                 padding="5em",
+                bg="blue.50",
+                rounded="lg",
             ),
             rx.hstack(
                 rx.foreach(
                     rx.selected_files("upload_1"), 
-                    rx.text
-                )
+                    lambda file: rx.text(file, color="gray.700", font_size="sm")
+                ),
+                spacing="2",
             ),
             rx.hstack(
                 rx.button(
                     "Upload",
-                    on_click=State.handle_upload(
-                        rx.upload_files(upload_id="upload_1")
-                    ),
+                    on_click=State.handle_upload(rx.upload_files(upload_id="upload_1")),
+                    color_scheme="blue",
+                    size="2",  # Numeric size
                 ),
                 rx.button(
                     "Clear",
@@ -145,13 +154,16 @@ def imagetopdf() -> rx.Component:
                         State.clear_files,
                         rx.clear_selected_files("upload_1")
                     ],
+                    color_scheme="red",
+                    size="2",  # Numeric size
                 ),
                 rx.button(
                     "Convert to PDF",
-                    on_click=[
-                        State.convert_to_pdf,
-                    ],
+                    on_click=State.convert_to_pdf,
+                    color_scheme="green",
+                    size="2",  # Numeric size
                 ),
+                spacing="4",
             ),
             
             # Download button - only shown when PDF is available
@@ -161,6 +173,7 @@ def imagetopdf() -> rx.Component:
                     rx.button(
                         "Download PDF",
                         color_scheme="green",
+                        size="2",  # Numeric size
                     ),
                     href=rx.get_upload_url(State.pdf_file),
                     is_external=True,
@@ -171,12 +184,18 @@ def imagetopdf() -> rx.Component:
             rx.foreach(
                 State.img,
                 lambda img: rx.image(
-                    src=rx.get_upload_url(img)
+                    src=rx.get_upload_url(img),
+                    border="1px solid",
+                    border_color="gray.200",
+                    rounded="lg",
+                    shadow="sm",
                 ),
             ),
 
             padding="5em",
-            spacing="4",
-            align='center',
+            spacing="6",
+            align="center",
+            bg="gray.50",
+            min_h="100vh",
         )
     )
