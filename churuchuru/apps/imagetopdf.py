@@ -79,6 +79,11 @@ class State(rx.State):
             for img_name in self.img:
                 img_path = upload_dir / img_name
                 img = Image.open(img_path)
+
+                # Remove metadata, instead of using exiftool
+                # Solves issues of combining into PDF where you get replica copies of image
+                img.save(img_path, "JPEG", quality=100)
+                img = Image.open(img_path)
                 
                 # Convert to RGB if necessary
                 if img.mode != 'RGB':

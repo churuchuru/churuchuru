@@ -25,6 +25,7 @@ MODERN_THEME = {
 class State(rx.State):
     is_dark_mode: bool = True  # Default to dark mode
 
+    @rx.event
     def toggle_theme(self):
         """Toggle between light and dark mode."""
         self.is_dark_mode = not self.is_dark_mode
