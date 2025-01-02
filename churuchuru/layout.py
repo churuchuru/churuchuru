@@ -85,7 +85,7 @@ def layout(*children, theme):
             # Footer
             rx.box(
                 rx.hstack(
-                    rx.text("Copyright Churu Churu 2025"),
+                    rx.text("Copyright © 2025 Churu Churu", style={"color": theme["primary"]}),
                     width="100%",
                     justify="center",
                     padding_y="2em",
