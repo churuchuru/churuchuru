@@ -1,55 +1,74 @@
 import reflex as rx
+
+# Application
 from churuchuru.apps.counter import counter
 from churuchuru.apps.imagetopdf import imagetopdf
-from churuchuru.layout import layout
 
-# Define a theme with light and dark mode colors
-MODERN_THEME = {
-    "light": {
-        "primary": "#6D28D9",  # Purple
-        "secondary": "#1E40AF",  # Blue
-        "background": "#F9FAFB",  # Light gray
-        "text": "#1F2937",  # Dark gray
-        "card_bg": "#FFFFFF",  # White
-    },
-    "dark": {
-        "primary": "#8B5CF6",  # Lighter Purple
-        "secondary": "#3B82F6",  # Lighter Blue
-        "background": "#1F2937",  # Dark gray
-        "text": "#F9FAFB",  # Light gray
-        "card_bg": "#374151",  # Darker gray
-    }
-}
+# Theme
+from churuchuru.layout import layout
+from churuchuru.components.colors import COLORS
+
 
 # Define the app state
 class State(rx.State):
     is_dark_mode: bool = True  # Default to dark mode
 
-    @rx.event
     def toggle_theme(self):
         """Toggle between light and dark mode."""
         self.is_dark_mode = not self.is_dark_mode
 
-# Theme toggle button
+# Theme toggle button with shadcn/ui style
 def theme_toggle():
     return rx.button(
         rx.cond(State.is_dark_mode, rx.icon(tag="moon"), rx.icon(tag="sun")),
         on_click=State.toggle_theme,
         position="fixed",
-        bottom="1em",
-        right="1em",
+        bottom="1.5em",
+        right="1.5em",
         z_index="999",
         border_radius="full",
-        box_shadow="lg",
+        bg=rx.cond(State.is_dark_mode, COLORS["dark"]["card_bg"], COLORS["light"]["card_bg"]),  # Adjust background for light/dark theme
+        backdrop_filter="blur(10px)",
+        border="1px solid",
+        border_color=rx.cond(State.is_dark_mode, COLORS["dark"]["border"], COLORS["light"]["border"]),
+        color=rx.cond(State.is_dark_mode, "white", "black"),  # Adjust icon color for light/dark theme
+        _hover={"transform": "scale(1.1)", "transition": "all 0.3s ease"},
     )
 
-# Main page
+# Card component with shadcn/ui style
+def app_card(title, description, href, theme):
+    return rx.card(
+        rx.link(
+            rx.vstack(
+                rx.heading(title, size="7", color=theme["primary"]),
+                rx.text(description, size="4", color=theme["text"]),
+                spacing="2",
+                align="center",
+            ),
+            href=href,
+            _hover={"text_decoration": "none"},
+        ),
+        bg=theme["card_bg"],
+        padding="1.5em",
+        border_radius="8px",
+        border="1px solid",
+        border_color=theme["border"],
+        box_shadow="0 1px 3px rgba(0, 0, 0, 0.1)",
+        _hover={
+            "box_shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
+            "transform": "translateY(-2px)",
+            "transition": "all 0.3s ease",
+            "bg": theme["hover"],
+        },
+    )
+
+# Main page with shadcn/ui-inspired design
 def index():
     # Use rx.cond to dynamically select the theme
     theme = rx.cond(
         State.is_dark_mode,
-        MODERN_THEME["dark"],
-        MODERN_THEME["light"],
+        COLORS["dark"],
+        COLORS["light"],
     )
 
     return layout(
@@ -61,48 +80,18 @@ def index():
                     rx.text("Explore the free tools below to get started.", size="5", color=theme["text"]),
                     text_align="center",
                     padding_bottom="2em",
+                    animate="fadeIn",  # Smooth fade-in animation
                 ),
                 # Cards Section
                 rx.flex(
-                    rx.card(
-                        rx.link(
-                            rx.vstack(
-                                rx.heading("Counter", size="7", color=theme["primary"]),
-                                rx.text("Application to add or minus 1 or reset counter", size="4", color=theme["text"]),
-                                spacing="2",
-                                align="center",
-                            ),
-                            href="/counter",
-                            _hover={"text_decoration": "none"},
-                        ),
-                        bg=theme["card_bg"],
-                        padding="1.5em",
-                        border_radius="12px",
-                        box_shadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-                        _hover={"box_shadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)", "transform": "translateY(-5px)", "transition": "all 0.3s ease"},
-                    ),
-                    rx.card(
-                        rx.link(
-                            rx.vstack(
-                                rx.heading("Image to PDF", size="7", color=theme["primary"]),
-                                rx.text("Application to convert any image to a PDF", size="4", color=theme["text"]),
-                                spacing="2",
-                                align="center",
-                            ),
-                            href="/imagetopdf",
-                            _hover={"text_decoration": "none"},
-                        ),
-                        bg=theme["card_bg"],
-                        padding="1.5em",
-                        border_radius="12px",
-                        box_shadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-                        _hover={"box_shadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)", "transform": "translateY(-5px)", "transition": "all 0.3s ease"},
-                    ),
+                    app_card("Counter", "Add, subtract, or reset a counter.", "/counter", theme),
+                    app_card("Image to PDF", "Convert any image to a PDF.", "/imagetopdf", theme),
                     spacing="4",
                     justify="center",
                     align="center",
                     flex_wrap="wrap",
                     width="100%",
+                    animate="slideUp",  # Smooth slide-up animation
                 ),
                 spacing="6",
                 align="center",

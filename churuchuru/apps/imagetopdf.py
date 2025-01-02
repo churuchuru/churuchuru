@@ -81,7 +81,7 @@ class State(rx.State):
                 img = Image.open(img_path)
 
                 # Remove metadata, instead of using exiftool
-                # Solves issues of combining into PDF where you get replica copies of image
+                # Solves issues of combining into PDF where you get replica copies of images
                 img.save(img_path, "JPEG", quality=100)
                 img = Image.open(img_path)
                 
