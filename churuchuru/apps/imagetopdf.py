@@ -127,18 +127,21 @@ def imagetopdf() -> rx.Component:
     
     return layout(
         rx.vstack(
-            rx.heading("Image to PDF", size="4", color="blue.800"),
+            rx.heading("Image to PDF", size="4", color=theme["primary"]),  # Apply theme color to heading
             
             rx.upload(
                 rx.vstack(
                     rx.button(
                         "Select Images",
-                        color_scheme="blue",
+                        bg=theme["card_bg"],  # Apply theme background to button
+                        color=theme["text"],  # Apply theme text color to button
+                        border=f"1px solid {theme['border']}",  # Apply theme border to button
+                        _hover={"bg": theme["hover"]},  # Apply theme hover effect
                         size="2",  # Numeric size
                     ),
                     rx.text(
                         "Drag and drop image files here or click to select",
-                        color="gray.600",
+                        color=theme["text"],  # Apply theme text color
                         font_size="sm",
                     ),
                     align="center",
@@ -146,15 +149,15 @@ def imagetopdf() -> rx.Component:
                 ),
                 id="upload_1",
                 border="2px dashed",
-                border_color="blue.200",
+                border_color=theme["border"],  # Apply theme border color
                 padding="5em",
-                bg="blue.50",
+                bg=theme["card_bg"],  # Apply theme background to upload area
                 rounded="lg",
             ),
             rx.hstack(
                 rx.foreach(
                     rx.selected_files("upload_1"), 
-                    lambda file: rx.text(file, color="gray.700", font_size="sm")
+                    lambda file: rx.text(file, color=theme["text"], font_size="sm")  # Apply theme text color
                 ),
                 spacing="2",
             ),
@@ -162,7 +165,10 @@ def imagetopdf() -> rx.Component:
                 rx.button(
                     "Upload",
                     on_click=State.handle_upload(rx.upload_files(upload_id="upload_1")),
-                    color_scheme="blue",
+                    bg=theme["card_bg"],  # Apply theme background to button
+                    color=theme["text"],  # Apply theme text color to button
+                    border=f"1px solid {theme['border']}",  # Apply theme border to button
+                    _hover={"bg": theme["hover"]},  # Apply theme hover effect
                     size="2",  # Numeric size
                 ),
                 rx.button(
@@ -171,13 +177,19 @@ def imagetopdf() -> rx.Component:
                         State.clear_files,
                         rx.clear_selected_files("upload_1")
                     ],
-                    color_scheme="red",
+                    bg=theme["card_bg"],  # Apply theme background to button
+                    color=theme["text"],  # Apply theme text color to button
+                    border=f"1px solid {theme['border']}",  # Apply theme border to button
+                    _hover={"bg": theme["hover"]},  # Apply theme hover effect
                     size="2",  # Numeric size
                 ),
                 rx.button(
                     "Convert to PDF",
                     on_click=State.convert_to_pdf,
-                    color_scheme="green",
+                    bg=theme["card_bg"],  # Apply theme background to button
+                    color=theme["text"],  # Apply theme text color to button
+                    border=f"1px solid {theme['border']}",  # Apply theme border to button
+                    _hover={"bg": theme["hover"]},  # Apply theme hover effect
                     size="2",  # Numeric size
                 ),
                 spacing="4",
@@ -189,7 +201,10 @@ def imagetopdf() -> rx.Component:
                 rx.link(
                     rx.button(
                         "Download PDF",
-                        color_scheme="green",
+                        bg=theme["card_bg"],  # Apply theme background to button
+                        color=theme["text"],  # Apply theme text color to button
+                        border=f"1px solid {theme['border']}",  # Apply theme border to button
+                        _hover={"bg": theme["hover"]},  # Apply theme hover effect
                         size="2",  # Numeric size
                     ),
                     href=rx.get_upload_url(State.pdf_file),
@@ -203,7 +218,7 @@ def imagetopdf() -> rx.Component:
                 lambda img: rx.image(
                     src=rx.get_upload_url(img),
                     border="1px solid",
-                    border_color="gray.200",
+                    border_color=theme["border"],  # Apply theme border color
                     rounded="lg",
                     shadow="sm",
                 ),
@@ -212,7 +227,7 @@ def imagetopdf() -> rx.Component:
             padding="5em",
             spacing="6",
             align="center",
-            bg="gray.50",
+            bg=theme["background"],  # Apply theme background to the page
             min_h="100vh",
         ),
         theme=theme

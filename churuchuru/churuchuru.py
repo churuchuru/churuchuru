@@ -23,8 +23,8 @@ def index():
             rx.vstack(
                 # Hero Section
                 rx.box(
-                    rx.heading("Useful Applications", size="9", color=theme["primary"]),
-                    rx.text("Explore the free tools below to get started.", size="5", color=theme["text"]),
+                    rx.heading("churu churu", size="9", color=theme["primary"]),
+                    rx.text("useful tools without the bs", size="5", color=theme["text"]),
                     text_align="center",
                     padding_bottom="2em",
                     animate="fadeIn",  # Smooth fade-in animation

@@ -34,33 +34,47 @@ def counter() -> rx.Component:
         COLORS["light"],
     )
         
-    return layout(rx.center(
-        rx.vstack(
-            rx.heading("Counter"),
-            rx.hstack(
-                rx.button(
-                    "Decrement", 
-                    color_scheme="ruby",
-                    on_click=State.decrement,
+    return layout(
+        rx.center(
+            rx.vstack(
+                rx.heading("Counter", color=theme["primary"]),  # Apply theme color to heading
+                rx.hstack(
+                    rx.button(
+                        "Decrement",
+                        on_click=State.decrement,
+                        bg=theme["card_bg"],  # Apply theme background to button
+                        color=theme["text"],  # Apply theme text color to button
+                        border=f"1px solid {theme['border']}",  # Apply theme border to button
+                        _hover={"bg": theme["hover"]},  # Apply theme hover effect
+                    ),
+                    rx.heading(
+                        State.count,
+                        font_size="2em",
+                        color=theme["text"],  # Apply theme text color to count
+                    ),
+                    rx.button(
+                        "Increment",
+                        on_click=State.increment,
+                        bg=theme["card_bg"],  # Apply theme background to button
+                        color=theme["text"],  # Apply theme text color to button
+                        border=f"1px solid {theme['border']}",  # Apply theme border to button
+                        _hover={"bg": theme["hover"]},  # Apply theme hover effect
+                    ),
+                    spacing="4",
                 ),
-                rx.heading(State.count, font_size="2em"),
                 rx.button(
-                    "Increment",
-                    color_scheme="grass", 
-                    on_click=State.increment,
+                    "Reset",
+                    on_click=State.reset_count,
+                    bg=theme["card_bg"],  # Apply theme background to button
+                    color=theme["text"],  # Apply theme text color to button
+                    border=f"1px solid {theme['border']}",  # Apply theme border to button
+                    _hover={"bg": theme["hover"]},  # Apply theme hover effect
                 ),
                 spacing="4",
+                align="center",
             ),
-            rx.button(
-                "Reset",
-                color_scheme="gray", 
-                on_click=State.reset_count,
-            ),
-            spacing="4",
-            align="center",
+            bg=theme["background"],  # Apply theme background to the page
+            height="100vh",
         ),
-        height="100vh",
-    ),
-    theme=theme
+        theme=theme,  # Pass the theme to layout
     )
-
