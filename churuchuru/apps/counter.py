@@ -1,5 +1,8 @@
 import reflex as rx
-from churuchuru.layout import layout
+
+# Theme
+from churuchuru.layout import layout, Color
+from churuchuru.components.colors import COLORS
 
 '''
 Counter Application
@@ -24,6 +27,13 @@ class State(rx.State):
 
 # Counter App
 def counter() -> rx.Component:
+    # Use rx.cond to dynamically select the theme
+    theme = rx.cond(
+        Color.is_dark_mode,
+        COLORS["dark"],
+        COLORS["light"],
+    )
+        
     return layout(rx.center(
         rx.vstack(
             rx.heading("Counter"),
@@ -50,6 +60,7 @@ def counter() -> rx.Component:
             align="center",
         ),
         height="100vh",
-    )
+    ),
+    theme=theme
     )
 

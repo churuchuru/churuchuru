@@ -1,9 +1,14 @@
 import reflex as rx
+
+# Logics
 from PIL import Image
 import os
 import hashlib
 import time
-from churuchuru.layout import layout
+
+# Theme
+from churuchuru.layout import layout, Color
+from churuchuru.components.colors import COLORS
 
 class State(rx.State):
     """The app state."""
@@ -113,6 +118,13 @@ class State(rx.State):
             self.pdf_file = ""
 
 def imagetopdf() -> rx.Component:
+    # Use rx.cond to dynamically select the theme
+    theme = rx.cond(
+        Color.is_dark_mode,
+        COLORS["dark"],
+        COLORS["light"],
+    )
+    
     return layout(
         rx.vstack(
             rx.heading("Image to PDF", size="4", color="blue.800"),
@@ -202,5 +214,6 @@ def imagetopdf() -> rx.Component:
             align="center",
             bg="gray.50",
             min_h="100vh",
-        )
+        ),
+        theme=theme
     )
