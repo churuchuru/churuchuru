@@ -31,39 +31,74 @@ def theme_toggle():
         _hover={"transform": "scale(1.1)", "transition": "all 0.3s ease"},
     )
 
+# Card component
+def app_card(title, description, href, theme):
+    return rx.card(
+        rx.link(
+            rx.vstack(
+                rx.heading(title, size="7", color=theme["primary"]),
+                rx.text(description, size="4", color=theme["text"]),
+                spacing="2",
+                align="center",
+            ),
+            href=href,
+            _hover={"text_decoration": "none"},
+        ),
+        bg=theme["card_bg"],
+        padding="1.5em",
+        border_radius="8px",
+        border="1px solid",
+        border_color=theme["border"],
+        box_shadow="0 1px 3px rgba(0, 0, 0, 0.1)",
+        _hover={
+            "box_shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
+            "transform": "translateY(-2px)",
+            "transition": "all 0.3s ease",
+            "bg": theme["hover"],
+        },
+    )
+
 def layout(*children, theme):
     return rx.box(
         rx.vstack(
-            # Navigation bar with theme styling
+            # Navigation bar
             rx.hstack(
                 rx.hstack(
                     rx.link(
-                        "Home",
+                        "ε(´｡•᎑•`)っ 🍜", 
                         href="/",
-                        color=theme["primary"],  # Use theme color for the link
-                        _hover={"color": theme["primary"], "text_decoration": "underline"},  # Hover effect
-                    ),
+                        style={"color": theme["primary"]}),
                     spacing="3",
                 ),
                 width="100%",
                 justify="center",
                 padding_top="2em",
-                padding_bottom="1em",
-                bg=theme["card_bg"],  # Apply theme background to the navigation bar
-                border_bottom=f"1px solid {theme['border']}",  # Add a border with theme color
-                box_shadow="sm",  # Add a subtle shadow
             ),
+            
             # Main content
             rx.box(
                 *children,
                 width="100%",
-                color=theme["text"],  # Apply theme text color
+                flex="1",  # This makes the content area expand
             ),
-            theme_toggle(),  # Add the theme toggle button
+            
+            # Footer
+            rx.box(
+                rx.hstack(
+                    rx.text("Copyright Churu Churu 2025 | Simple Tools That Work"),
+                    width="100%",
+                    justify="center",
+                    padding_y="2em",
+                ),
+                width="100%",
+                bg=theme["background"],
+            ),
+            
+            theme_toggle(),
             width="100%",
             align="center",
+            min_height="100vh",  # Ensures minimum full viewport height
+            spacing="0",  # Removes default spacing between vstack items
         ),
-        bg=theme["background"],  # Apply the theme background
-        height="100vh",
-        color=theme["text"],  # Apply theme text color globally
+        bg=theme["background"],
     )
