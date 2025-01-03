@@ -3,6 +3,8 @@ import reflex as rx
 # Application
 from churuchuru.apps.counter import counter
 from churuchuru.apps.imagetopdf import imagetopdf
+from churuchuru.apps.notetaking import notetaking
+
 
 # Theme
 from churuchuru.layout import layout, app_card, Color
@@ -58,3 +60,4 @@ app = rx.App()
 app.add_page(index)
 app.add_page(counter)
 app.add_page(imagetopdf)
+app.add_page(notetaking)
