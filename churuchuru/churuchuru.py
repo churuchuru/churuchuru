@@ -35,6 +35,7 @@ def index():
                 rx.flex(
                     app_card("Counter", "Add, subtract, or reset a counter.", "/counter", theme),
                     app_card("Image to PDF", "Convert any image to a PDF.", "/imagetopdf", theme),
+                    app_card("Note Taking", "Write any notes and convert to any format.", "/notetaking", theme),
                     spacing="4",
                     justify="center",
                     align="center",
