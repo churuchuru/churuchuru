@@ -98,7 +98,7 @@ def notetaking() -> rx.Component:
 
     return layout(
         rx.vstack(
-            rx.heading("Modern Note Taking", size="4", color=theme["primary"]),
+            rx.heading("Note Taking", size="4", color=theme["primary"]),
 
             rx.text_area(
                 placeholder="Take your notes here...",

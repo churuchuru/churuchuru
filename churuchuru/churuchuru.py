@@ -5,11 +5,19 @@ from churuchuru.apps.counter import counter
 from churuchuru.apps.imagetopdf import imagetopdf
 from churuchuru.apps.notetaking import notetaking
 
-
 # Theme
 from churuchuru.layout import layout, app_card, Color
 from churuchuru.components.colors import COLORS
 
+# Cleanup functionality
+from churuchuru.components.cleanup import start_cleanup_scheduler
+
+# Define the upload directory and retention period
+UPLOAD_DIR = "./uploaded_files"
+RETENTION_PERIOD_SECONDS = 10 # 60 seconds
+
+# Start the cleanup scheduler when the application starts
+start_cleanup_scheduler(UPLOAD_DIR, RETENTION_PERIOD_SECONDS)
 
 # Main page with shadcn/ui-inspired design
 def index():
