@@ -50,6 +50,8 @@ class State(rx.State):
                 self._export_docx(file_path)
             elif format == "png":
                 self._export_png(file_path)
+            elif format == "md":
+                self._export_md(file_path)
             else:
                 logger.error(f"Unsupported export format: {format}")
                 return
@@ -88,6 +90,11 @@ class State(rx.State):
         font = ImageFont.load_default()
         d.text((10, 10), self.text, fill=(0, 0, 0), font=font)
         img.save(file_path)
+
+    def _export_md(self, file_path):
+        """Export the note as a Markdown file."""
+        with file_path.open("w") as file_object:
+            file_object.write(self.text)
 
 def notetaking() -> rx.Component:
     theme = rx.cond(
@@ -143,6 +150,15 @@ def notetaking() -> rx.Component:
                 rx.button(
                     "Export as Image",
                     on_click=lambda: State.export_note("png"),
+                    bg=theme["card_bg"],
+                    color=theme["text"],
+                    border=f"1px solid {theme['border']}",
+                    _hover={"bg": theme["hover"]},
+                    size="2",
+                ),
+                rx.button(
+                    "Export as Markdown",
+                    on_click=lambda: State.export_note("md"),
                     bg=theme["card_bg"],
                     color=theme["text"],
                     border=f"1px solid {theme['border']}",

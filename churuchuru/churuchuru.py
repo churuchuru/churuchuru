@@ -14,7 +14,7 @@ from churuchuru.components.cleanup import start_cleanup_scheduler
 
 # Define the upload directory and retention period
 UPLOAD_DIR = "./uploaded_files"
-RETENTION_PERIOD_SECONDS = 10 # 60 seconds
+RETENTION_PERIOD_SECONDS = 60 * 3 # 60 seconds
 
 # Start the cleanup scheduler when the application starts
 start_cleanup_scheduler(UPLOAD_DIR, RETENTION_PERIOD_SECONDS)
