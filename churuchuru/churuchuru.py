@@ -39,17 +39,23 @@ def index():
                     padding_bottom="2em",
                     animate="fadeIn",  # Smooth fade-in animation
                 ),
-                # Cards Section
-                rx.flex(
+                # Improved cards section with grid layout and better responsiveness
+                rx.grid(
                     app_card("Counter", "Add, subtract, or reset a counter.", "/counter", theme),
                     app_card("Image to PDF", "Convert any image to a PDF.", "/imagetopdf", theme),
                     app_card("Note Taking", "Write any notes and convert to any format.", "/notetaking", theme),
-                    spacing="4",
-                    justify="center",
-                    align="center",
-                    flex_wrap="wrap",
+                    template_columns={
+                        "base": "1fr",  # Mobile: 1 card per row
+                        "sm": "repeat(2, 1fr)",  # Tablet: 2 cards per row
+                        "lg": "repeat(3, 1fr)",  # Desktop: 3 cards per row
+                        "xl": "repeat(4, 1fr)",  # Large screens: 4 cards per row
+                    },
+                    gap="6",  # Increased gap for better spacing
+                    padding="2em",
                     width="100%",
-                    animate="slideUp",  # Smooth slide-up animation
+                    max_width="1200px",
+                    margin="0 auto",
+                    animate="fadeIn 0.5s ease-in-out",
                 ),
                 spacing="6",
                 align="center",

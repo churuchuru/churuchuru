@@ -32,30 +32,43 @@ def theme_toggle():
     )
 
 # Card component
-def app_card(title, description, href, theme):
-    return rx.card(
-        rx.link(
+def app_card(title: str, description: str, href: str, theme: dict) -> rx.Component:
+    return rx.link(
+        rx.card(
             rx.vstack(
-                rx.heading(title, size="7", color=theme["primary"]),
-                rx.text(description, size="4", color=theme["text"]),
-                spacing="2",
+                rx.heading(
+                    title,
+                    size="6",
+                    color=theme["primary"],
+                    text_align="center",
+                    margin_bottom="0.5em",
+                ),
+                rx.text(
+                    description,
+                    color=theme["text"],
+                    text_align="center",
+                    font_size="1em",
+                    opacity="0.8",
+                ),
+                spacing="4",
                 align="center",
+                padding="2em",  # Increased padding for better spacing
             ),
-            href=href,
-            _hover={"text_decoration": "none"},
+            _hover={
+                "box_shadow": "0 8px 12px rgba(0, 0, 0, 0.2)",  # Enhanced shadow
+                "transform": "translateY(-4px)",  # More pronounced lift
+                "transition": "all 0.3s ease",
+                "bg": theme["hover"],
+            },
+            height="100%",
+            width="100%",  # Ensure cards take full width of their container
+            border_radius="xl",
+            border=f"1px solid {theme['border']}",
+            background_color=theme["card_bg"],
+            transition="all 0.2s ease-in-out",
         ),
-        bg=theme["card_bg"],
-        padding="1.5em",
-        border_radius="8px",
-        border="1px solid",
-        border_color=theme["border"],
-        box_shadow="0 1px 3px rgba(0, 0, 0, 0.1)",
-        _hover={
-            "box_shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
-            "transform": "translateY(-2px)",
-            "transition": "all 0.3s ease",
-            "bg": theme["hover"],
-        },
+        href=href,
+        text_decoration="none",
     )
 
 def layout(*children, theme):
