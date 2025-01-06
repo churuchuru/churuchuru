@@ -193,6 +193,9 @@ def imagetopdf() -> rx.Component:
                     size="2",  # Numeric size
                 ),
                 spacing="4",
+                wrap="wrap",  # Enable wrapping
+                width="100%",  # Full width container
+                justify="center",  # Center buttons
             ),
             
             # Download button - only shown when PDF is available
@@ -229,6 +232,7 @@ def imagetopdf() -> rx.Component:
             align="center",
             bg=theme["background"],  # Apply theme background to the page
             min_h="100vh",
+            
         ),
         theme=theme
     )

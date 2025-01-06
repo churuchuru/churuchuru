@@ -175,6 +175,9 @@ def notetaking() -> rx.Component:
                     size="2",
                 ),
                 spacing="4",
+                wrap="wrap",  # Enable wrapping
+                width="100%",  # Full width container
+                justify="center",  # Center buttons
             ),
 
             # Download link (only shown when a file is ready to download)
