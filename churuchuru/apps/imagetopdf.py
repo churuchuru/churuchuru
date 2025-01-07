@@ -15,6 +15,7 @@ class State(rx.State):
     img: list[str] = []  # Store uploaded images
     pdf_file: str = ""  # Store the generated PDF filename
     upload_hash: str = ""  # Store the unique upload hash
+    error_message: str = ""  # Store error messages for debugging
     
     def generate_upload_hash(self) -> str:
         """Generate a unique hash for the upload session."""
@@ -24,9 +25,11 @@ class State(rx.State):
     @rx.event
     async def handle_upload(self, files: list[rx.UploadFile]):
         """Handle the upload of file(s)."""
-        # Generate new hash if this is the first upload
-        if not self.upload_hash:
-            self.upload_hash = self.generate_upload_hash()
+        # Clear previous state
+        self.clear_files()
+        
+        # Generate new hash for this upload session
+        self.upload_hash = self.generate_upload_hash()
             
         for file in files:
             upload_data = await file.read()
@@ -63,6 +66,7 @@ class State(rx.State):
         self.img = []
         self.pdf_file = ""
         self.upload_hash = ""
+        self.error_message = ""
     
     @rx.event
     async def convert_to_pdf(self):
@@ -71,7 +75,8 @@ class State(rx.State):
         Returns the path to the generated PDF file.
         """
         if not self.img:
-            return None
+            self.error_message = "No images uploaded to convert."
+            return
         
         try:
             # Get the upload directory path
@@ -85,12 +90,16 @@ class State(rx.State):
                 img_path = upload_dir / img_name
                 img = Image.open(img_path)
 
+                # Convert RGBA images to RGB
+                if img.mode == 'RGBA':
+                    img = img.convert('RGB')
+
                 # Remove metadata, instead of using exiftool
                 # Solves issues of combining into PDF where you get replica copies of images
                 img.save(img_path, "JPEG", quality=100)
                 img = Image.open(img_path)
                 
-                # Convert to RGB if necessary
+                # Ensure the image is in RGB mode
                 if img.mode != 'RGB':
                     img = img.convert('RGB')
                 
@@ -113,8 +122,11 @@ class State(rx.State):
                     resolution=100.0
                 )
                 
+                # Clear error message on success
+                self.error_message = ""
+                
         except Exception as e:
-            print(f"Error converting to PDF: {e}")
+            self.error_message = f"Error converting to PDF: {e}"
             self.pdf_file = ""
 
 def imagetopdf() -> rx.Component:
@@ -162,14 +174,18 @@ def imagetopdf() -> rx.Component:
                 spacing="2",
             ),
             rx.hstack(
-                rx.button(
-                    "Upload",
-                    on_click=State.handle_upload(rx.upload_files(upload_id="upload_1")),
-                    bg=theme["card_bg"],  # Apply theme background to button
-                    color=theme["text"],  # Apply theme text color to button
-                    border=f"1px solid {theme['border']}",  # Apply theme border to button
-                    _hover={"bg": theme["hover"]},  # Apply theme hover effect
-                    size="2",  # Numeric size
+                # Show Upload button only if files are selected
+                rx.cond(
+                    rx.selected_files("upload_1"),
+                    rx.button(
+                        "Upload",
+                        on_click=State.handle_upload(rx.upload_files(upload_id="upload_1")),
+                        bg=theme["card_bg"],  # Apply theme background to button
+                        color=theme["text"],  # Apply theme text color to button
+                        border=f"1px solid {theme['border']}",  # Apply theme border to button
+                        _hover={"bg": theme["hover"]},  # Apply theme hover effect
+                        size="2",  # Numeric size
+                    ),
                 ),
                 rx.button(
                     "Clear",
@@ -213,6 +229,16 @@ def imagetopdf() -> rx.Component:
                     href=rx.get_upload_url(State.pdf_file),
                     is_external=True,
                     download=True,
+                ),
+            ),
+            
+            # Display error message if any
+            rx.cond(
+                State.error_message != "",
+                rx.text(
+                    State.error_message,
+                    color="red",
+                    font_size="sm",
                 ),
             ),
             

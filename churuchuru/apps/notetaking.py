@@ -120,59 +120,39 @@ def notetaking() -> rx.Component:
             ),
 
             rx.hstack(
-                rx.button(
-                    "Export as TXT",
-                    on_click=lambda: State.export_note("txt"),
-                    bg=theme["card_bg"],
-                    color=theme["text"],
-                    border=f"1px solid {theme['border']}",
-                    _hover={"bg": theme["hover"]},
-                    size="2",
-                ),
-                rx.button(
-                    "Export as PDF",
-                    on_click=lambda: State.export_note("pdf"),
-                    bg=theme["card_bg"],
-                    color=theme["text"],
-                    border=f"1px solid {theme['border']}",
-                    _hover={"bg": theme["hover"]},
-                    size="2",
-                ),
-                rx.button(
-                    "Export as Word",
-                    on_click=lambda: State.export_note("docx"),
-                    bg=theme["card_bg"],
-                    color=theme["text"],
-                    border=f"1px solid {theme['border']}",
-                    _hover={"bg": theme["hover"]},
-                    size="2",
-                ),
-                rx.button(
-                    "Export as Image",
-                    on_click=lambda: State.export_note("png"),
-                    bg=theme["card_bg"],
-                    color=theme["text"],
-                    border=f"1px solid {theme['border']}",
-                    _hover={"bg": theme["hover"]},
-                    size="2",
-                ),
-                rx.button(
-                    "Export as Markdown",
-                    on_click=lambda: State.export_note("md"),
-                    bg=theme["card_bg"],
-                    color=theme["text"],
-                    border=f"1px solid {theme['border']}",
-                    _hover={"bg": theme["hover"]},
-                    size="2",
-                ),
-                rx.button(
-                    "Clear Note",
-                    on_click=State.clear_note,
-                    bg=theme["card_bg"],
-                    color=theme["text"],
-                    border=f"1px solid {theme['border']}",
-                    _hover={"bg": theme["hover"]},
-                    size="2",
+                # Show Export and Clear buttons only if there is text
+                rx.cond(
+                    State.text != "",
+                    rx.hstack(
+                        rx.menu.root(
+                            rx.menu.trigger(
+                                rx.button("Export", 
+                                    bg=theme["card_bg"],
+                                    color=theme["text"], 
+                                    border=f"1px solid {theme['border']}",
+                                    _hover={"bg": theme["hover"]},
+                                    size="2"
+                                ),
+                            ),
+                            rx.menu.content(
+                                rx.menu.item("Export as TXT", on_click=lambda: State.export_note("txt")),
+                                rx.menu.item("Export as PDF", on_click=lambda: State.export_note("pdf")),
+                                rx.menu.item("Export as Word", on_click=lambda: State.export_note("docx")),
+                                rx.menu.item("Export as Image", on_click=lambda: State.export_note("png")),
+                                rx.menu.item("Export as Markdown", on_click=lambda: State.export_note("md")),
+                            ),
+                        ),
+                        rx.button(
+                            "Clear Note",
+                            on_click=State.clear_note,
+                            bg=theme["card_bg"],
+                            color=theme["text"],
+                            border=f"1px solid {theme['border']}",
+                            _hover={"bg": theme["hover"]},
+                            size="2",
+                        ),
+                        spacing="4",
+                    ),
                 ),
                 spacing="4",
                 wrap="wrap",  # Enable wrapping
@@ -180,7 +160,7 @@ def notetaking() -> rx.Component:
                 justify="center",  # Center buttons
             ),
 
-            # Download link (only shown when a file is ready to download)
+            # Download button (only shown when a file is ready to download)
             rx.cond(
                 State.download_filename != "",
                 rx.button(
