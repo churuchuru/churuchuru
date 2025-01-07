@@ -39,37 +39,53 @@ def app_card(title: str, description: str, href: str, theme: dict) -> rx.Compone
                 rx.heading(
                     title,
                     size="6",
-                    color=theme["primary"],
-                    text_align="center",
+                    color="#FFFFFF",  # White by default
+                    text_align="left",
                     margin_bottom="0.5em",
+                    font_weight="bold",
+                    transition="color 0.3s ease",  # Smooth transition for header color
+                    _hover={
+                        "color": theme["primary"],  # Change to primary color on hover
+                    },
                 ),
                 rx.text(
                     description,
-                    color=theme["text"],
-                    text_align="center",
+                    color="#D1D5DB",  # Light grey for description (always)
+                    text_align="left",
                     font_size="1em",
                     opacity="0.8",
+                    line_height="1.6",  
                 ),
                 spacing="4",
-                align="center",
-                padding="2em",  # Increased padding for better spacing
+                align="start",
+                padding="2em",
             ),
             _hover={
-                "box_shadow": "0 8px 12px rgba(0, 0, 0, 0.2)",  # Enhanced shadow
-                "transform": "translateY(-4px)",  # More pronounced lift
+                "box_shadow": "0 8px 16px rgba(0, 0, 0, 0.3)",  # Enhanced shadow on hover
+                "transform": "translateY(-6px)",  # Lift effect on hover
                 "transition": "all 0.3s ease",
-                "bg": theme["hover"],
+                "border_color": theme["primary"],  # Border color changes to primary on hover
             },
             height="100%",
-            width="100%",  # Ensure cards take full width of their container
+            # width="100%",
+            max_width="600px",  # Reduced width for compactness
             border_radius="xl",
-            border=f"1px solid {theme['border']}",
-            background_color=theme["card_bg"],
-            transition="all 0.2s ease-in-out",
+            border=f"2px solid {theme['card_bg']}",  # Default border color uses card_bg
+            background_color="transparent",  # Transparent background always
+            transition="all 0.3s ease-in-out",
+            box_shadow="0 4px 8px rgba(0, 0, 0, 0.1)",  # Subtle shadow by default
+            position="relative",
+            overflow="hidden",
+            margin="0 auto",  # Center the card horizontally
+            # display="flex",
+            justify_content="center",  # Center content horizontally
+            align_items="center",  # Center content vertically
         ),
         href=href,
         text_decoration="none",
+        margin="1em",  # Add space between cards
     )
+
 
 def layout(*children, theme):
     return rx.box(

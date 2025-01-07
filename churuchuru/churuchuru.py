@@ -44,12 +44,14 @@ def index():
                     app_card("Counter", "Add, subtract, or reset a counter.", "/counter", theme),
                     app_card("Image to PDF", "Convert any image to a PDF.", "/imagetopdf", theme),
                     app_card("Note Taking", "Write any notes and convert to any format.", "/notetaking", theme),
-                    template_columns={
-                        "base": "1fr",  # Mobile: 1 card per row
-                        "sm": "repeat(2, 1fr)",  # Tablet: 2 cards per row
-                        "lg": "repeat(3, 1fr)",  # Desktop: 3 cards per row
-                        "xl": "repeat(4, 1fr)",  # Large screens: 4 cards per row
-                    },
+                    
+                    # template_columns={
+                    #     "base": "1fr",  # Mobile: 1 card per row
+                    #     "sm": "repeat(2, 1fr)",  # Tablet: 2 cards per row
+                    #     "lg": "repeat(3, 1fr)",  # Desktop: 3 cards per row
+                    #     "xl": "repeat(4, 1fr)",  # Large screens: 4 cards per row
+                    # },
+
                     gap="6",  # Increased gap for better spacing
                     padding="2em",
                     width="100%",
