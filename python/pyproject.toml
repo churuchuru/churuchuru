@@ -9,5 +9,13 @@ dependencies = [
     "marimo",
     "ruff",
     "ty",
-    "pytest"
+    "pytest",
+    "mcp",
+    "openai",
+    "nbformat",
+    "vegafusion",
+    "vl-convert-python",
+    "altair",
+    "duckdb",
+    "sqlglot"
 ]

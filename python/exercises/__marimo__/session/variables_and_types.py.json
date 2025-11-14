@@ -1,0 +1,229 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.17.8"
+  },
+  "cells": [
+    {
+      "id": "Toio",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aiAs",
+      "code_hash": "4c934c98ea24ebfd1bc5b526904c8c02",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"variables-in-python\">Variables in Python</h3>\n<span class=\"paragraph\">In Python, variables are containers for storing data values. Unlike statically typed languages (e.g., Java or C++), Python is <strong>dynamically typed</strong>, meaning you don't need to declare the type of a variable upfront. The type is inferred from the value assigned to it and can even change during execution if you reassign a different type to the same variable name.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "WnrW",
+      "code_hash": "9af5418323c231dc5445cd4b6bba14e8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">For example:</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "GuDR",
+      "code_hash": "d0329610f9b72f47877ca7715d79bd2c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "AcnZ",
+      "code_hash": "a9ce06f044311a18f64d7653e798cbc9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">To check the type of a variable, use the built-in <code>type()</code> function:</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "JYqI",
+      "code_hash": "cc18eb2e0c12add8f5e0aab7bac4926f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "<class 'str'>\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "ae5278fae0bec5c7f799c4f1b0487f5e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"common-types-of-python-variables-data-types\">Common Types of Python Variables (Data Types)</h3>\n<span class=\"paragraph\">Python has several built-in data types that variables can hold. These are categorized into <strong>immutable</strong> (cannot be changed after creation) and <strong>mutable</strong> (can be modified). Below is a table summarizing the most common ones, with examples:</span>\n<table>\n<thead>\n<tr>\n<th>Data Type</th>\n<th>Category</th>\n<th>Description</th>\n<th>Example</th>\n<th>Mutable?</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>int</code></td>\n<td>Number</td>\n<td>Whole numbers (no size limit in Python 3).</td>\n<td><code>age = 25</code></td>\n<td>No</td>\n</tr>\n<tr>\n<td><code>float</code></td>\n<td>Number</td>\n<td>Decimal numbers.</td>\n<td><code>height = 5.9</code></td>\n<td>No</td>\n</tr>\n<tr>\n<td><code>complex</code></td>\n<td>Number</td>\n<td>Complex numbers (real + imaginary parts).</td>\n<td><code>z = 3 + 4j</code></td>\n<td>No</td>\n</tr>\n<tr>\n<td><code>str</code></td>\n<td>Text</td>\n<td>Immutable sequence of characters (strings). Supports single/double quotes.</td>\n<td><code>name = \"Alice\"</code></td>\n<td>No</td>\n</tr>\n<tr>\n<td><code>bool</code></td>\n<td>Logic</td>\n<td>Boolean values: <code>True</code> or <code>False</code>.</td>\n<td><code>is_valid = True</code></td>\n<td>No</td>\n</tr>\n<tr>\n<td><code>list</code></td>\n<td>Sequence</td>\n<td>Ordered, mutable collection of items (allows duplicates).</td>\n<td><code>fruits = [\"apple\", \"banana\"]</code></td>\n<td>Yes</td>\n</tr>\n<tr>\n<td><code>tuple</code></td>\n<td>Sequence</td>\n<td>Ordered, immutable collection of items (allows duplicates).</td>\n<td><code>coords = (10, 20)</code></td>\n<td>No</td>\n</tr>\n<tr>\n<td><code>dict</code></td>\n<td>Mapping</td>\n<td>Unordered (pre-Python 3.7), mutable key-value pairs (keys must be unique).</td>\n<td><code>person = {\"name\": \"Bob\", \"age\": 30}</code></td>\n<td>Yes</td>\n</tr>\n<tr>\n<td><code>set</code></td>\n<td>Set</td>\n<td>Unordered, mutable collection of unique items.</td>\n<td><code>unique_nums = {1, 2, 3}</code></td>\n<td>Yes</td>\n</tr>\n<tr>\n<td><code>NoneType</code></td>\n<td>Special</td>\n<td>Represents the absence of a value (<code>None</code>).</td>\n<td><code>result = None</code></td>\n<td>No</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"key-notes\">Key Notes:</h4>\n<ul>\n<li><strong>Numbers</strong>: <code>int</code> and <code>float</code> handle arithmetic operations seamlessly (e.g., <code>5 + 3.2</code> results in <code>8.2</code>, a float).</li>\n<li><strong>Sequences</strong> (<code>list</code>, <code>tuple</code>): Indexed (0-based), e.g., <code>fruits[0]</code> gives <code>\"apple\"</code>.</li>\n<li><strong>Collections</strong> (<code>dict</code>, <code>set</code>): No indexing by position; <code>dict</code> uses keys, <code>set</code> uses membership checks.</li>\n<li><strong>Type Conversion</strong>: Use functions like <code>int(\"5\")</code>, <code>str(10)</code>, or <code>list(\"abc\")</code> to convert between types.</li>\n<li><strong>Advanced Types</strong>: Python also supports user-defined types (classes), bytes (<code>bytes</code>), bytearrays, and more via libraries.</li>\n</ul>\n<span class=\"paragraph\">For hands-on exploration, try running these in a Python interpreter or Jupyter notebook. If you meant something else (e.g., variable scopes like local/global), provide more details!</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "bc130d379c3e348a83fef44c4b9415b1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"why-int-is-immutable-in-python\">Why <code>int</code> is Immutable in Python</h3>\n<span class=\"paragraph\">In Python, <strong>mutability</strong> refers to whether an object's internal state (its value or contents) can be modified <em>in place</em> after it's created. <strong>Immutable</strong> objects, like <code>int</code>, cannot be changed directly\u2014any operation that appears to \"modify\" them actually creates a <em>new</em> object and rebinds the variable name to it. This is a deliberate design choice in Python, not a limitation.</span>\n<h4 id=\"reasons-for-making-int-immutable\">Reasons for Making <code>int</code> Immutable</h4>\n<ol>\n<li><strong>Thread Safety</strong>: Immutable objects are inherently safe to share across threads without locks or synchronization, as their value can't accidentally change.</li>\n<li><strong>Hashability and Caching</strong>: Immutables can be hashed reliably (e.g., for use as dictionary keys or set elements). Python also caches small integers (-5 to 256) for efficiency, reusing the same object for the same value.</li>\n<li><strong>Simplicity and Predictability</strong>: It prevents subtle bugs from side effects (e.g., one part of code changing a shared value unexpectedly) and makes code easier to reason about.</li>\n<li><strong>Performance Optimizations</strong>: The interpreter can apply shortcuts, like interning strings or reusing integers, without worrying about mutations.</li>\n</ol>\n<span class=\"paragraph\">In contrast, mutable types like <code>list</code> or <code>dict</code> allow in-place changes (e.g., <code>my_list.append(4)</code> modifies the existing list).</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qBwa",
+      "code_hash": "0647ebbeb46f406b16d8475d9ec07ab1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"demonstration\">Demonstration</h4>\n<span class=\"paragraph\">Consider this code:</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "XaxU",
+      "code_hash": "98263c468d3d519229e071746c9c1b02",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "4311163168\n4311163200\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "mczV",
+      "code_hash": "b69294771d062abbb051ecd10358a4b4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">The <code>id()</code> function returns a unique identifier (essentially the memory address). The change in ID proves no mutation occurred\u2014the original <code>5</code> remains unchanged forever. If you tried <code>a += 1</code> on a mutable object like a list, the ID would stay the same.</span>\n<span class=\"paragraph\">This behavior applies to other immutable built-ins like <code>str</code>, <code>float</code>, <code>tuple</code>, and <code>bool</code>. If you need \"mutable\" numbers, use a wrapper like a list containing the value (e.g., <code>num = [5]; num[0] += 1</code>), but that's rarely necessary.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "UeIf",
+      "code_hash": "5caceb076f90e3b78ef912f1fe1adc0a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"lists-in-python-a-mutable-data-type\">Lists in Python: A Mutable Data Type</h3>\n<span class=\"paragraph\">A <strong>list</strong> in Python is an ordered, flexible collection of items (which can be of mixed types) that can grow or shrink dynamically. It's one of the most commonly used mutable types, meaning you can change its contents <em>in place</em> without creating a new object. This contrasts with immutable types like <code>int</code> or <code>str</code>, where modifications create entirely new objects.</span>\n<h4 id=\"example-demonstrating-mutability\">Example: Demonstrating Mutability</h4>\n<span class=\"paragraph\">Here's a simple code example to show how lists are mutable:</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vQhK",
+      "code_hash": "86e976d6d6459aad5025330a024275b9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Original list: ['apple', 'banana', 'cherry']\nOriginal ID: 4360527232\nAfter append: ['apple', 'banana', 'cherry', 'date']\nID after append: 4360527232\nAfter changing index 1: ['apple', 'blueberry', 'cherry', 'date']\nID after change: 4360527232\nAfter remove: ['apple', 'blueberry', 'date']\nID after remove: 4360527232\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "sxZz",
+      "code_hash": "d0ad972bd993b6798775c120e2796ea8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">You can run this in a Python interpreter to see the IDs match\u2014proving the <em>same object</em> is being modified.</span>\n<h4 id=\"why-are-lists-mutable\">Why Are Lists Mutable?</h4>\n<span class=\"paragraph\">Python's designers (led by Guido van Rossum) made lists mutable for practical reasons tied to performance, flexibility, and real-world use cases:</span>\n<ol>\n<li><strong>Efficiency</strong>: In-place changes (e.g., <code>append()</code> or <code>pop()</code>) are faster and use less memory than creating a new list each time. For large lists, this avoids unnecessary copying of data.</li>\n<li>\n<span class=\"paragraph\"><strong>Dynamic Data Structures</strong>: Lists are ideal for scenarios where data changes frequently, like:</span>\n<ul>\n<li>Storing user inputs in a queue (e.g., a to-do list app).</li>\n<li>Building results incrementally (e.g., collecting search hits in a web scraper).</li>\n<li>Manipulating sequences in algorithms (e.g., sorting or filtering data).</li>\n</ul>\n</li>\n<li><strong>Reference Semantics</strong>: Python passes objects by reference, so mutability allows shared modifications. For example:\n   <div class=\"language-python codehilite\"><pre><span></span><code><span class=\"n\">list1</span> <span class=\"o\">=</span> <span class=\"p\">[</span><span class=\"mi\">1</span><span class=\"p\">,</span> <span class=\"mi\">2</span><span class=\"p\">]</span>\n<span class=\"n\">list2</span> <span class=\"o\">=</span> <span class=\"n\">list1</span>  <span class=\"c1\"># Both point to the same list object</span>\n<span class=\"n\">list2</span><span class=\"o\">.</span><span class=\"n\">append</span><span class=\"p\">(</span><span class=\"mi\">3</span><span class=\"p\">)</span>\n<span class=\"nb\">print</span><span class=\"p\">(</span><span class=\"n\">list1</span><span class=\"p\">)</span>   <span class=\"c1\"># Output: [1, 2, 3] \u2014 change affects both!</span>\n</code></pre></div>\n   This is powerful for efficiency but requires care (use <code>copy.deepcopy()</code> if you need independent copies).</li>\n<li><strong>Trade-offs</strong>: Mutability can introduce bugs (e.g., unintended side effects in functions), so Python provides immutable alternatives like <code>tuple</code> for cases where constancy is key (e.g., fixed coordinates).</li>\n</ol>\n<h4 id=\"quick-comparison-mutable-vs-immutable-sequences\">Quick Comparison: Mutable vs. Immutable Sequences</h4>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>Mutable?</th>\n<th>Example Operation</th>\n<th>Creates New Object?</th>\n<th>Use Case</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>list</code></td>\n<td>Yes</td>\n<td><code>my_list.append(4)</code></td>\n<td>No</td>\n<td>Dynamic collections</td>\n</tr>\n<tr>\n<td><code>tuple</code></td>\n<td>No</td>\n<td><code>my_tuple = (1, 2) + (3,)</code></td>\n<td>Yes</td>\n<td>Fixed data (e.g., records)</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "jKta",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SDXA",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "tuNj",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

@@ -63,3 +63,9 @@ ty check
 ```bash
 pytest
 ```
+
+## Launch Marimo
+
+```bash
+marimo edit
+```
