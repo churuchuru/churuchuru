@@ -1,7 +1,0 @@
-README.md
-pyproject.toml
-churuchuru_python.egg-info/PKG-INFO
-churuchuru_python.egg-info/SOURCES.txt
-churuchuru_python.egg-info/dependency_links.txt
-churuchuru_python.egg-info/requires.txt
-churuchuru_python.egg-info/top_level.txt

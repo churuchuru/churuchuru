@@ -1,4 +1,0 @@
-marimo
-ruff
-ty
-pytest
