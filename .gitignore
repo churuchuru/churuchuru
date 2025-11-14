@@ -1,4 +1,10 @@
 # macOS
 .DS_Store
 
+# Python
+*.egg-info
+__pycache__/
+*.pyc
+*.env
+*.venv
 
