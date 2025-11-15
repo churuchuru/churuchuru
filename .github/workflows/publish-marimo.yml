@@ -26,22 +26,7 @@ jobs:
             - name: Create output directory
               run: mkdir -p build
 
-            - name: 🏠 Generate metadata
-              run: bash homepage/generate-metadata.sh
-
-            - name: � Commit metadata changes
-              run: |
-                  git config --local user.email "action@github.com"
-                  git config --local user.name "GitHub Action"
-                  if git diff --quiet homepage/metadata.json; then
-                    echo "No changes to metadata.json"
-                  else
-                    git add homepage/metadata.json
-                    git commit -m "chore: update metadata.json [skip ci]"
-                    git push
-                  fi
-
-            - name: �📄 Export notebooks
+            - name:  Export notebooks
               run: |
                   cd python
                   find exercises -name "*.py" -type f | while read file; do
