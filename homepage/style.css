@@ -1,18 +1,20 @@
 /* Churuchuru Homepage - Ghostty Terminal Emulator Style */
 /* Catppuccin Mocha with Bash Terminal Look */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
-
 @font-face {
     font-family: 'Hack Nerd Font';
-    src: url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@master/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf');
+    src: url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@master/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf') format('truetype');
     font-weight: normal;
+    font-display: swap;
+    font-feature-settings: normal;
 }
 
 @font-face {
     font-family: 'Hack Nerd Font';
-    src: url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@master/patched-fonts/Hack/Bold/HackNerdFont-Bold.ttf');
+    src: url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@master/patched-fonts/Hack/Bold/HackNerdFont-Bold.ttf') format('truetype');
     font-weight: bold;
+    font-display: swap;
+    font-feature-settings: normal;
 }
 
 /* Catppuccin Mocha Colors */
@@ -30,7 +32,7 @@
 }
 
 * {
-    font-family: 'Hack Nerd Font', 'Hack', monospace;
+    font-family: 'Hack Nerd Font', 'JetBrains Mono', 'Courier New', monospace;
     margin: 0;
     padding: 0;
     box-sizing: border-box;

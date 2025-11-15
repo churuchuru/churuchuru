@@ -12,24 +12,23 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('metadata.json')
             .then(response => response.json())
             .then(data => {
-                console.log('Metadata loaded:', data);
                 allNotebooks = Object.entries(data.notebooks).map(([key, value]) => ({
                     id: key,
                     ...value
                 }));
-                console.log('Parsed notebooks:', allNotebooks);
                 renderNotebooks(allNotebooks);
             })
-            .catch(error => console.error('Error loading metadata:', error));
+            .catch(error => {
+                // Silently fail in production
+                if (process.env.NODE_ENV !== 'production') console.error('Error loading metadata:', error);
+            });
     }
 
     // Render notebook items in terminal style
     function renderNotebooks(notebooks) {
-        console.log('Rendering notebooks, count:', notebooks.length);
         notebooksContainer.innerHTML = '';
         
         if (notebooks.length === 0) {
-            console.log('No notebooks to display');
             noResults.classList.add('show');
             return;
         }

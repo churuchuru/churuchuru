@@ -15,8 +15,21 @@ This will:
 2. ✅ Setup Python environment
 3. ✅ Generate notebook metadata
 4. ✅ Export notebooks to HTML WASM (editable mode)
-5. ✅ Start local web server
-6. ✅ Open browser to http://localhost:8000
+5. ✅ Regenerate minified CSS/JS for optimal performance ⚡
+6. ✅ Start local web server
+7. ✅ Open browser to http://localhost:8000
+
+### Environment Setup (Optional but Recommended)
+
+For best minification performance, install these tools once:
+
+```bash
+npm install -g cssnano-cli terser
+```
+
+Without them, the build script will use fallback sed-based minification.
+
+## Developer Workflow
 
 ## Features
 
@@ -59,6 +72,26 @@ churuchuru/
    ```
 3. Re-run `./run-server.sh`
 
+## Editing Homepage
+
+When you edit `homepage/style.css` or `homepage/script.js`:
+
+```bash
+# 1. Make your changes
+vim homepage/style.css
+
+# 2. Run dev server (auto-regenerates minified files)
+./run-server.sh
+
+# 3. Test locally at http://localhost:8000
+
+# 4. Commit your changes
+git add homepage/style.* homepage/script.*
+git commit -m "Update: description of changes"
+```
+
+**Note:** Minified files (`style.min.css`, `script.min.js`) are **automatically regenerated** by `run-server.sh`. You should commit them to ensure consistent production builds.
+
 ## Testing Checklist
 
 - [ ] Homepage displays with search bar and notebook cards
@@ -73,9 +106,8 @@ churuchuru/
 Push to `main` branch to automatically deploy to GitHub Pages via GitHub Action.
 
 The GitHub Action will:
-1. Export all notebooks (edit mode, Catppuccin Mocha theme)
-2. Generate metadata
-3. Deploy to GitHub Pages
+1. Export all notebooks (edit mode)
+2. Deploy to GitHub Pages
 
 ## Technologies
 
@@ -84,5 +116,41 @@ The GitHub Action will:
 - **Catppuccin**: Beautiful color schemes
 - **Tailwind CSS**: Modern styling framework
 
-## Core Maintainer
+## Performance Optimization
+
+### Overview
+
+The homepage is optimized for speed with:
+
+- **Inlined critical CSS** - Eliminates render-blocking styles
+- **Deferred JavaScript** - Non-blocking script loading
+- **Font optimization** - `font-display: swap` for instant text rendering
+- **Minified assets** - 39% smaller files with automatic regeneration
+- **Aggressive caching** - 30 days for CSS/JS, 1 year for fonts
+- **CDN preconnect** - Faster connections to external resources
+
+### Cache Headers
+
+GitHub Pages automatically handles caching via their CDN:
+- **CSS/JS**: Cached by GitHub's CDN
+- **Fonts**: Long-lived cache (optimized via `font-display: swap`)
+- **HTML**: Short-lived cache (allows quick updates)
+
+All optimizations (minification, compression) work with GitHub's automatic caching.
+
+### Automatic Regeneration
+
+Optimization files are **automatically regenerated** every time you run:
+
+```bash
+./run-server.sh
+```
+
+This includes:
+- `style.min.css` - Minified CSS
+- `script.min.js` - Minified JavaScript
+- Cache header configuration
+
+### Core Maintainer
+
 [Ritchie Ng](https://github.com/ritchieng)

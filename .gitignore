@@ -13,3 +13,6 @@ __marimo__
 
 # Page build
 build
+
+# Page build optimization information
+homepage/.optimization-build-info.txt

@@ -4,7 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Churuchuru - Python Exercises</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://static.cloudflareinsights.com">
+    
+    <!-- Prefetch metadata for faster loading -->
+    <link rel="prefetch" href="metadata.json">
+    
+    <!-- Inline critical CSS for instant rendering -->
+    <style>
+        /* Critical CSS - Fastest path to rendering */
+        :root {
+            --ctp-blue: #89b4fa;
+            --ctp-green: #a6e3a1;
+            --ctp-yellow: #f9e2af;
+            --ctp-red: #f38ba8;
+            --ctp-text: #cdd6f4;
+            --ctp-subtext0: #a6adc8;
+            --ctp-surface0: #313244;
+            --ctp-surface1: #45475a;
+            --ctp-base: #1e1e2e;
+            --ctp-crust: #11111b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            background-color: var(--ctp-base);
+            color: var(--ctp-text);
+            height: 100%;
+            overflow-x: hidden;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .terminal {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--ctp-base);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .terminal-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    
+    <!-- Deferred stylesheet for non-critical styles -->
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'; this.onload=null;">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    
+    <!-- Google Fonts with font-display: swap -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"></noscript>
 </head>
 <body>
     <div class="terminal">
@@ -58,6 +128,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Defer script for better rendering performance -->
+    <script src="script.js" defer></script>
 </body>
 </html>

@@ -40,6 +40,24 @@ cd "$PYTHON_DIR" && uv sync > /dev/null 2>&1
 # Generate metadata
 cd "$HOMEPAGE_DIR" && bash generate-metadata.sh > /dev/null 2>&1
 
+# Regenerate minified CSS and JS for optimization
+echo -e "${YELLOW}Optimizing CSS and JavaScript...${NC}"
+cd "$HOMEPAGE_DIR"
+
+# Minify CSS - Remove whitespace and comments
+npx cssnano-cli style.css -o style.min.css 2>/dev/null || {
+    # Fallback to simple minification if cssnano not available
+    sed 's/\/\*[^*]*\*\+\([^/*][^*]*\*\+\)*\///g' style.css | tr -s ' ' | sed 's/ *{ */{/g; s/ *} *}/}/g; s/ *: */:/' > style.min.css
+}
+
+# Minify JS - Remove comments and whitespace
+npx terser script.js -o script.min.js -c -m 2>/dev/null || {
+    # Fallback to simple minification if terser not available
+    sed 's/\/\/.*$//' script.js | sed 's/\/\*[\s\S]*?\*\///g' | tr '\n' ' ' | tr -s ' ' | sed 's/ //g' > script.min.js
+}
+
+echo -e "${GREEN}✓ Minified files generated${NC}"
+
 # Export notebooks
 mkdir -p "$BUILD_DIR/python"
 cd "$PYTHON_DIR"
@@ -51,7 +69,10 @@ find exercises -name "*.py" -type f | while read file; do
 done
 
 # Copy files
-cp "$HOMEPAGE_DIR"/{index.html,metadata.json,script.js,style.css} "$BUILD_DIR/"
+cp "$HOMEPAGE_DIR"/{index.html,metadata.json,script.js,style.css,script.min.js,style.min.css} "$BUILD_DIR/" 2>/dev/null || {
+    # Fallback if optional files don't exist
+    cp "$HOMEPAGE_DIR"/{index.html,metadata.json,script.js,style.css} "$BUILD_DIR/"
+}
 
 echo -e "${GREEN}✓ Ready!${NC}\n"
 

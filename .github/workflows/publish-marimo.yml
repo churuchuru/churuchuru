@@ -41,11 +41,19 @@ jobs:
               run: |
                   # Run the metadata generation script to create metadata.json
                   bash homepage/generate-metadata.sh
+                  # Minify CSS
+                  cd homepage
+                  npx cssnano-cli style.css -o style.min.css 2>/dev/null || sed 's/\/\*[^*]*\*\+\([^/*][^*]*\*\+\)*\///g' style.css | tr -s ' ' | sed 's/ *{ */{/g; s/ *} *}/}/g; s/ *: */:/' > style.min.css
+                  # Minify JS
+                  npx terser script.js -o script.min.js -c -m 2>/dev/null || sed 's/\/\/.*$//' script.js | sed 's/\/\*[\s\S]*?\*\///g' | tr '\n' ' ' | tr -s ' ' | sed 's/ //g' > script.min.js
+                  cd ..
                   # Copy homepage files to build directory
                   cp homepage/index.html build/index.html
                   cp homepage/metadata.json build/metadata.json
                   cp homepage/script.js build/script.js
+                  cp homepage/script.min.js build/script.min.js
                   cp homepage/style.css build/style.css
+                  cp homepage/style.min.css build/style.min.css
 
             - name: 📦 Upload Pages Artifact
               uses: actions/upload-pages-artifact@v3
