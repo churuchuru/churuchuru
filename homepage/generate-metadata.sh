@@ -43,8 +43,7 @@ while IFS= read -r file; do
     \"$filename\": {
       \"title\": \"$title\",
       \"description\": \"Interactive notebook on $title\",
-      \"icon\": \"📚\",
-      \"url\": \"./${filename}.html\"
+      \"url\": \"./python/$filename\"
     }"
     
     echo -e "${GREEN}✓${NC} Found: $filename"

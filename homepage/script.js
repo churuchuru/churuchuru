@@ -23,41 +23,32 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error loading metadata:', error));
     }
 
-    // Render notebook cards
+    // Render notebook items in terminal style
     function renderNotebooks(notebooks) {
         console.log('Rendering notebooks, count:', notebooks.length);
         notebooksContainer.innerHTML = '';
         
         if (notebooks.length === 0) {
             console.log('No notebooks to display');
-            noResults.classList.remove('hidden');
+            noResults.classList.add('show');
             return;
         }
         
-        noResults.classList.add('hidden');
+        noResults.classList.remove('show');
         
         notebooks.forEach((notebook, index) => {
-            const card = document.createElement('a');
-            card.href = notebook.url || `${notebook.id}.html`;
-            card.className = 'block fade-in';
-            card.style.animationDelay = `${index * 0.1}s`;
+            const item = document.createElement('a');
+            item.href = notebook.url || `${notebook.id}.html`;
+            item.className = 'notebook-item fade-in';
+            item.style.animationDelay = `${index * 0.05}s`;
             
-            card.innerHTML = `
-                <div class="bg-slate-700 hover:bg-slate-600 rounded-lg p-6 h-full cursor-pointer transition-all duration-300 group border border-slate-600 hover:border-blue-500">
-                    <div class="text-4xl mb-3">${notebook.icon || '📚'}</div>
-                    <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition">
-                        ${notebook.title}
-                    </h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                        ${notebook.description}
-                    </p>
-                    <span class="inline-block text-blue-400 text-sm font-medium group-hover:text-blue-300 transition">
-                        Open notebook →
-                    </span>
-                </div>
+            item.innerHTML = `
+                <div class="notebook-title">${notebook.title}</div>
+                <div class="notebook-desc">${notebook.description}</div>
+                <div class="notebook-path">${notebook.url || `${notebook.id}.html`}</div>
             `;
             
-            notebooksContainer.appendChild(card);
+            notebooksContainer.appendChild(item);
         });
     }
 
@@ -79,6 +70,15 @@ document.addEventListener('DOMContentLoaded', function() {
         filterNotebooks(e.target.value);
     });
 
+    // Clear search on Escape key
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            searchInput.value = '';
+            filterNotebooks('');
+        }
+    });
+
     // Load notebooks on page load
     loadNotebooks();
 });
+

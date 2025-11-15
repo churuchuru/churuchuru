@@ -6,8 +6,7 @@
     "variables_and_types": {
       "title": "Variables And Types",
       "description": "Interactive notebook on Variables And Types",
-      "icon": "📚",
-      "url": "./variables_and_types.html"
+      "url": "./python/variables_and_types"
     }
   }
 }

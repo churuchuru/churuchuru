@@ -28,12 +28,13 @@ jobs:
 
             - name:  Export notebooks
               run: |
+                  mkdir -p build/python
                   cd python
                   find exercises -name "*.py" -type f | while read file; do
-                    # Get filename without extension
                     filename=$(basename "$file" .py)
-                    # Export to HTML
-                    uv run marimo export html-wasm "$file" -o "../build/${filename}.html" --mode run
+                    notebook_dir="../build/python/${filename}"
+                    mkdir -p "$notebook_dir"
+                    uv run marimo export html-wasm "$file" -o "$notebook_dir/index.html" --mode edit
                   done
 
             - name: 🏠 Generate metadata and copy homepage files
