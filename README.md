@@ -2,6 +2,8 @@
 
 A collection of interactive Python notebooks built with **Marimo**, served with a beautiful **Catppuccin Mocha** dark theme and **Hack Nerd Font** styling.
 
+This is an experimental repo for me to have fun, teach my son, and hopefully other parents might find this useful.
+
 ## Quick Start
 
 ```bash
@@ -15,35 +17,6 @@ This will:
 4. ✅ Export notebooks to HTML WASM (editable mode)
 5. ✅ Start local web server
 6. ✅ Open browser to http://localhost:8000
-
-## Manual Setup (if needed)
-
-```bash
-# Install dependencies
-cd python && uv sync && cd ..
-
-# Generate metadata
-cd homepage && bash generate-metadata.sh && cd ..
-
-# Export notebooks
-cd python
-mkdir -p ../build/python
-find exercises -name "*.py" -type f | while read file; do
-    filename=$(basename "$file" .py)
-    uv run marimo export html-wasm "$file" -o "../build/python/${filename}.html" --mode edit
-done
-cd ..
-
-# Copy homepage files
-cp homepage/index.html build/
-cp homepage/metadata.json build/
-cp homepage/script.js build/
-cp homepage/style.css build/
-cp homepage/marimo-theme.css build/
-
-# Start server
-cd build && python3 -m http.server 8000
-```
 
 ## Features
 
@@ -95,27 +68,6 @@ churuchuru/
 - [ ] Run button executes code
 - [ ] Search filters notebooks
 
-## Troubleshooting
-
-**Port 8000 in use?**
-```bash
-python3 -m http.server 9000  # Use port 9000 instead
-```
-
-**Theme not showing?**
-- Hard refresh browser: `Cmd+Shift+R` (Mac) or `Ctrl+Shift+R` (Windows/Linux)
-
-**Notebooks not appearing?**
-```bash
-cat homepage/metadata.json  # Verify metadata exists
-ls -la build/*.html        # Verify HTML exports exist
-```
-
-**Dependencies issue?**
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh  # Install uv
-```
-
 ## Deployment
 
 Push to `main` branch to automatically deploy to GitHub Pages via GitHub Action.
@@ -132,6 +84,5 @@ The GitHub Action will:
 - **Catppuccin**: Beautiful color schemes
 - **Tailwind CSS**: Modern styling framework
 
-## License
-
-MIT
+## Core Maintainer
+[Ritchie Ng](https://github.com/ritchieng)

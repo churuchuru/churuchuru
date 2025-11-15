@@ -4,7 +4,7 @@
   "description": "Explore interactive Python notebooks built with Marimo. Learn programming concepts through hands-on examples.",
   "notebooks": {
     "variables_and_types": {
-      "title": "Variables And Types",
+      "title": "Python: Variables And Types",
       "description": "Interactive notebook on Variables And Types",
       "url": "./python/variables_and_types"
     }

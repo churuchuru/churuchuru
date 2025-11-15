@@ -33,6 +33,13 @@ while IFS= read -r file; do
     # Convert filename to title (replace underscores with spaces, capitalize each word)
     title=$(echo "$filename" | sed 's/_/ /g' | awk '{for(i=1;i<=NF;i++)$i=toupper(substr($i,1,1))substr($i,2)}1')
     
+    # Extract language from the directory path (e.g., "python" from "...python/exercises")
+    language_dir=$(basename $(dirname "$PYTHON_EXERCISES_DIR"))
+    language=$(echo "$language_dir" | awk '{print toupper(substr($0,1,1))substr($0,2)}')
+    
+    # Prepend language to title
+    title_with_language="$language: $title"
+    
     if [ "$first" = false ]; then
         metadata="${metadata},"
     fi
@@ -41,12 +48,12 @@ while IFS= read -r file; do
     # Add entry to metadata
     metadata="${metadata}
     \"$filename\": {
-      \"title\": \"$title\",
+      \"title\": \"$title_with_language\",
       \"description\": \"Interactive notebook on $title\",
-      \"url\": \"./python/$filename\"
+      \"url\": \"./$language_dir/$filename\"
     }"
     
-    echo -e "${GREEN}✓${NC} Found: $filename"
+    echo -e "${GREEN}✓${NC} Found: $filename ($language)"
 done < <(find "$PYTHON_EXERCISES_DIR" -name "*.py" -type f ! -path "*/__pycache__/*" ! -path "*/__marimo__/*" | sort)
 
 # Close the JSON structure

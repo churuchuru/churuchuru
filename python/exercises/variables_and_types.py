@@ -13,6 +13,15 @@ def _():
 @app.cell
 def _(mo):
     mo.md(r"""
+    # Python Variables and Types
+    [Churu Churu Website](https://www.churuchuru.com) | [Churu Churu Github Repo](https://github.com/churuchuru/churuchuru)
+    """)
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
     ### Variables in Python
 
     In Python, variables are containers for storing data values. Unlike statically typed languages (e.g., Java or C++), Python is **dynamically typed**, meaning you don't need to declare the type of a variable upfront. The type is inferred from the value assigned to it and can even change during execution if you reassign a different type to the same variable name.
