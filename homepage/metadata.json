@@ -1,0 +1,12 @@
+{
+  "title": "Churuchuru - Interactive Learning Notebooks",
+  "subtitle": "Learn Python programming with interactive Marimo notebooks",
+  "description": "Explore interactive Python notebooks built with Marimo. Learn programming concepts through hands-on examples.",
+  "notebooks": {
+    "variables_and_types": {
+      "title": "Variables and Types",
+      "description": "Learn about Python variables, data types, and type conversion.",
+      "icon": "📦"
+    }
+  }
+}

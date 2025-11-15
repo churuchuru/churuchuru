@@ -1,0 +1,48 @@
+/* Custom styles for Churuchuru homepage */
+
+/* Smooth transitions */
+* {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Notebook card animations */
+.notebook-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.notebook-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Search input focus states */
+#searchInput:focus {
+    background-color: rgba(71, 85, 105, 0.8);
+}
+
+/* Gradient text for header */
+.gradient-text {
+    background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Card hover effect */
+.card-hover:hover {
+    background-color: rgba(71, 85, 105, 0.5);
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}

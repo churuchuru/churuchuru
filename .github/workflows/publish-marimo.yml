@@ -1,0 +1,104 @@
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '3.11'
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v2
+
+            - name: Install dependencies
+              run: cd python && uv sync
+
+            - name: Create output directory
+              run: mkdir -p build
+
+            - name: 🏠 Generate metadata
+              run: bash homepage/generate-metadata.sh
+
+            - name: � Commit metadata changes
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  if git diff --quiet homepage/metadata.json; then
+                    echo "No changes to metadata.json"
+                  else
+                    git add homepage/metadata.json
+                    git commit -m "chore: update metadata.json [skip ci]"
+                    git push
+                  fi
+
+            - name: �📄 Export notebooks
+              run: |
+                  cd python
+                  find exercises -name "*.py" -type f | while read file; do
+                    # Get filename without extension
+                    filename=$(basename "$file" .py)
+                    # Export to HTML
+                    uv run marimo export html-wasm "$file" -o "../build/${filename}.html" --mode run
+                  done
+
+            - name: 🏠 Create index page
+              run: |
+                  # Copy homepage template
+                  cp homepage/index.html build/index.html
+                  cp homepage/metadata.json build/metadata.json
+                  
+                  # Generate notebook list as JSON
+                  cd python
+                  cat > ../build/notebooks.json << 'EOF'
+                  [
+                  EOF
+                  
+                  first=true
+                  find exercises -name "*.py" -type f | sort | while read file; do
+                    filename=$(basename "$file" .py)
+                    if [ "$first" = false ]; then
+                      echo "," >> ../build/notebooks.json
+                    fi
+                    first=false
+                    echo "    {" >> ../build/notebooks.json
+                    echo "      \"filename\": \"${filename}\"," >> ../build/notebooks.json
+                    echo "      \"htmlfile\": \"${filename}.html\"" >> ../build/notebooks.json
+                    echo "    -n \"    }\"" >> ../build/notebooks.json
+                  done
+                  
+                  cat >> ../build/notebooks.json << 'EOF'
+                  ]
+                  EOF
+
+            - name: 📦 Upload Pages Artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: build
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+
+        permissions:
+            pages: write
+            id-token: write
+
+        steps:
+            - name: 🌐 Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
+              with:
+                  artifact_name: github-pages
