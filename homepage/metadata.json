@@ -3,5 +3,11 @@
   "subtitle": "Learn Python programming with interactive Marimo notebooks",
   "description": "Explore interactive Python notebooks built with Marimo. Learn programming concepts through hands-on examples.",
   "notebooks": {
+    "variables_and_types": {
+      "title": "Variables And Types",
+      "description": "Interactive notebook on Variables And Types",
+      "icon": "📚",
+      "url": "./variables_and_types.html"
+    }
   }
 }

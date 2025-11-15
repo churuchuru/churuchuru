@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('metadata.json')
             .then(response => response.json())
             .then(data => {
+                console.log('Metadata loaded:', data);
                 allNotebooks = Object.entries(data.notebooks).map(([key, value]) => ({
                     id: key,
                     ...value
                 }));
+                console.log('Parsed notebooks:', allNotebooks);
                 renderNotebooks(allNotebooks);
             })
             .catch(error => console.error('Error loading metadata:', error));
@@ -23,9 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Render notebook cards
     function renderNotebooks(notebooks) {
+        console.log('Rendering notebooks, count:', notebooks.length);
         notebooksContainer.innerHTML = '';
         
         if (notebooks.length === 0) {
+            console.log('No notebooks to display');
             noResults.classList.remove('hidden');
             return;
         }
@@ -34,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         notebooks.forEach((notebook, index) => {
             const card = document.createElement('a');
-            card.href = `${notebook.id}.html`;
+            card.href = notebook.url || `${notebook.id}.html`;
             card.className = 'block fade-in';
             card.style.animationDelay = `${index * 0.1}s`;
             

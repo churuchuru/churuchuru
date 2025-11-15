@@ -27,11 +27,11 @@ EOF
 first=true
 
 # Find all .py files and generate notebook entries
-find "$PYTHON_EXERCISES_DIR" -name "*.py" -type f ! -path "*/__pycache__/*" ! -path "*/__marimo__/*" | sort | while read file; do
+while IFS= read -r file; do
     filename=$(basename "$file" .py)
     
-    # Convert filename to title (replace underscores with spaces, capitalize)
-    title=$(echo "$filename" | sed 's/_/ /g' | sed 's/\b\(.\)/\U\1/g')
+    # Convert filename to title (replace underscores with spaces, capitalize each word)
+    title=$(echo "$filename" | sed 's/_/ /g' | awk '{for(i=1;i<=NF;i++)$i=toupper(substr($i,1,1))substr($i,2)}1')
     
     if [ "$first" = false ]; then
         metadata="${metadata},"
@@ -43,11 +43,12 @@ find "$PYTHON_EXERCISES_DIR" -name "*.py" -type f ! -path "*/__pycache__/*" ! -p
     \"$filename\": {
       \"title\": \"$title\",
       \"description\": \"Interactive notebook on $title\",
-      \"icon\": \"📚\"
+      \"icon\": \"📚\",
+      \"url\": \"./${filename}.html\"
     }"
     
     echo -e "${GREEN}✓${NC} Found: $filename"
-done
+done < <(find "$PYTHON_EXERCISES_DIR" -name "*.py" -type f ! -path "*/__pycache__/*" ! -path "*/__marimo__/*" | sort)
 
 # Close the JSON structure
 metadata="${metadata}
