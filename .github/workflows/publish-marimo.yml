@@ -36,34 +36,15 @@ jobs:
                     uv run marimo export html-wasm "$file" -o "../build/${filename}.html" --mode run
                   done
 
-            - name: 🏠 Create index page
+            - name: 🏠 Generate metadata and copy homepage files
               run: |
-                  # Copy homepage template
+                  # Run the metadata generation script to create metadata.json
+                  bash homepage/generate-metadata.sh
+                  # Copy homepage files to build directory
                   cp homepage/index.html build/index.html
                   cp homepage/metadata.json build/metadata.json
-                  
-                  # Generate notebook list as JSON
-                  cd python
-                  cat > ../build/notebooks.json << 'EOF'
-                  [
-                  EOF
-                  
-                  first=true
-                  find exercises -name "*.py" -type f | sort | while read file; do
-                    filename=$(basename "$file" .py)
-                    if [ "$first" = false ]; then
-                      echo "," >> ../build/notebooks.json
-                    fi
-                    first=false
-                    echo "    {" >> ../build/notebooks.json
-                    echo "      \"filename\": \"${filename}\"," >> ../build/notebooks.json
-                    echo "      \"htmlfile\": \"${filename}.html\"" >> ../build/notebooks.json
-                    echo "    -n \"    }\"" >> ../build/notebooks.json
-                  done
-                  
-                  cat >> ../build/notebooks.json << 'EOF'
-                  ]
-                  EOF
+                  cp homepage/script.js build/script.js
+                  cp homepage/style.css build/style.css
 
             - name: 📦 Upload Pages Artifact
               uses: actions/upload-pages-artifact@v3
