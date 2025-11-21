@@ -22,7 +22,7 @@ def _(mo):
 @app.cell
 def _(mo):
     mo.md(r"""
-    ### Variables in Python
+    ## Variables in Python
 
     In Python, variables are containers for storing data values. Unlike statically typed languages (e.g., Java or C++), Python is **dynamically typed**, meaning you don't need to declare the type of a variable upfront. The type is inferred from the value assigned to it and can even change during execution if you reassign a different type to the same variable name.
     """)
@@ -61,7 +61,7 @@ def _(x):
 @app.cell
 def _(mo):
     mo.md(r"""
-    ### Common Types of Python Variables (Data Types)
+    ## Common Types of Python Variables (Data Types)
 
     Python has several built-in data types that variables can hold. These are categorized into **immutable** (cannot be changed after creation) and **mutable** (can be modified). Below is a table summarizing the most common ones, with examples:
 
@@ -78,7 +78,7 @@ def _(mo):
     | `set`      | Set       | Unordered, mutable collection of unique items.                              | `unique_nums = {1, 2, 3}`       | Yes     |
     | `NoneType` | Special   | Represents the absence of a value (`None`).                                 | `result = None`                 | No      |
 
-    #### Key Notes:
+    ### Key Notes
     - **Numbers**: `int` and `float` handle arithmetic operations seamlessly (e.g., `5 + 3.2` results in `8.2`, a float).
     - **Sequences** (`list`, `tuple`): Indexed (0-based), e.g., `fruits[0]` gives `"apple"`.
     - **Collections** (`dict`, `set`): No indexing by position; `dict` uses keys, `set` uses membership checks.
@@ -93,11 +93,11 @@ def _(mo):
 @app.cell
 def _(mo):
     mo.md(r"""
-    ### Why `int` is Immutable in Python
+    ## Why `int` is Immutable in Python
 
     In Python, **mutability** refers to whether an object's internal state (its value or contents) can be modified *in place* after it's created. **Immutable** objects, like `int`, cannot be changed directly—any operation that appears to "modify" them actually creates a *new* object and rebinds the variable name to it. This is a deliberate design choice in Python, not a limitation.
 
-    #### Reasons for Making `int` Immutable
+    ### Reasons for Making `int` Immutable
     1. **Thread Safety**: Immutable objects are inherently safe to share across threads without locks or synchronization, as their value can't accidentally change.
     2. **Hashability and Caching**: Immutables can be hashed reliably (e.g., for use as dictionary keys or set elements). Python also caches small integers (-5 to 256) for efficiency, reusing the same object for the same value.
     3. **Simplicity and Predictability**: It prevents subtle bugs from side effects (e.g., one part of code changing a shared value unexpectedly) and makes code easier to reason about.
@@ -111,7 +111,7 @@ def _(mo):
 @app.cell
 def _(mo):
     mo.md(r"""
-    #### Demonstration
+    ### Demonstration
     Consider this code:
     """)
     return
@@ -140,7 +140,7 @@ def _(mo):
 @app.cell
 def _(mo):
     mo.md(r"""
-    ### Lists in Python: A Mutable Data Type
+    ## Lists in Python: A Mutable Data Type
 
     A **list** in Python is an ordered, flexible collection of items (which can be of mixed types) that can grow or shrink dynamically. It's one of the most commonly used mutable types, meaning you can change its contents *in place* without creating a new object. This contrasts with immutable types like `int` or `str`, where modifications create entirely new objects.
 
@@ -179,7 +179,7 @@ def _(mo):
     mo.md(r"""
     You can run this in a Python interpreter to see the IDs match—proving the *same object* is being modified.
 
-    #### Why Are Lists Mutable?
+    ### Why Are Lists Mutable?
     Python's designers (led by Guido van Rossum) made lists mutable for practical reasons tied to performance, flexibility, and real-world use cases:
 
     1. **Efficiency**: In-place changes (e.g., `append()` or `pop()`) are faster and use less memory than creating a new list each time. For large lists, this avoids unnecessary copying of data.
@@ -200,7 +200,7 @@ def _(mo):
 
     4. **Trade-offs**: Mutability can introduce bugs (e.g., unintended side effects in functions), so Python provides immutable alternatives like `tuple` for cases where constancy is key (e.g., fixed coordinates).
 
-    #### Quick Comparison: Mutable vs. Immutable Sequences
+    ### Quick Comparison: Mutable vs. Immutable Sequences
     | Type    | Mutable? | Example Operation                  | Creates New Object? | Use Case                  |
     |---------|----------|------------------------------------|---------------------|---------------------------|
     | `list` | Yes     | `my_list.append(4)`               | No                 | Dynamic collections      |

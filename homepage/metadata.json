@@ -3,6 +3,16 @@
   "subtitle": "Learn Python programming with interactive Marimo notebooks",
   "description": "Explore interactive Python notebooks built with Marimo. Learn programming concepts through hands-on examples.",
   "notebooks": {
+    "lists": {
+      "title": "Python: Lists",
+      "description": "Interactive notebook on Lists",
+      "url": "./python/lists"
+    },
+    "scratchpad": {
+      "title": "Python: Scratchpad",
+      "description": "Interactive notebook on Scratchpad",
+      "url": "./python/scratchpad"
+    },
     "variables_and_types": {
       "title": "Python: Variables And Types",
       "description": "Interactive notebook on Variables And Types",
